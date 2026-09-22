@@ -1,6 +1,6 @@
 package edu.gcu.cst239.sharma.saniya.milestone_app.actions;
 
-//import edu.gcu.cst239.sharma.saniya.milestone_app.services.StoreFront;
+import edu.gcu.cst239.sharma.saniya.milestone_app.services.StoreFront;
 import edu.gcu.cst239.sharma.saniya.milestone_app.util.InputUtilities;
 
 /**
@@ -12,11 +12,16 @@ import edu.gcu.cst239.sharma.saniya.milestone_app.util.InputUtilities;
  */
 public class StartingActions {
 
-    //private final StoreFront store;
+    private final StoreFront store;
 
-    //public StartingActions(StoreFront store) {
-    //    this.store = store;
-    //}
+    /**
+     * Constructs a new instance of {@link StartingActions}.
+     *
+     * @param store the store front instance
+     */
+    public StartingActions(StoreFront store) {
+        this.store = store;
+    }
 
     /**
      * Starts the initial prompt asking the user how they would like
@@ -37,20 +42,20 @@ public class StartingActions {
             switch (choice) {
                 case 1:
                     System.out.println("You are using the app as a customer.");
-                    //CustomerActions customerActions = new CustomerActions(store);
-                    //customerActions.handleCustomerActions();
+                    CustomerActions customerActions = new CustomerActions(store);
+                    customerActions.handleCustomerActions();
                     break;
                 case 2:
                     System.out.println("You are using the app as a store manager.");
-                    //StoreManagerActions managerActions = new StoreManagerActions(store);
-                    //managerActions.handleManagerActions();
+                    StoreManagerActions managerActions = new StoreManagerActions(store);
+                    managerActions.handleManagerActions();
                     break;
                 case 3:
                     exitRequested = true;
                     break;
                 default:
                     // This case should never occur because readInt enforces range
-                    //System.out.println("Invalid selection. Please try again.");
+                    System.out.println("Invalid selection. Please try again.");
             }
         }
     }

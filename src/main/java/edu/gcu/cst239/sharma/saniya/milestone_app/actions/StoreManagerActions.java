@@ -29,7 +29,9 @@ public class StoreManagerActions {
             switch (choice) {
                 case 1:
                     System.out.println("You choose to view products in inventory.");
-                    System.out.println("This is milestone #1. No actual fuctionality has been implemented yet.");
+
+                    //store.getInventoryManager()
+                    
                     break;              
                 case 2:
                     System.out.println("You choose to search for a product in inventory.");

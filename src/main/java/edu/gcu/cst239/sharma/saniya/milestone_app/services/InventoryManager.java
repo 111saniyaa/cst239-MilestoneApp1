@@ -135,31 +135,75 @@ public class InventoryManager implements InventoryService{
     @Override
     public boolean addInventoryItem(InventoryItem item) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addInventoryItem'");
+        if (item == null || item.getProduct() == null) {
+            return false;
+        }
+
+        if(getInventoryItemByProductId(item.getProduct().getId()) != null) {
+            return false;
+        }
+
+        
+        return inventory.add(item);
     }
 
     @Override
     public boolean updateProduct(Product updatedProduct) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateProduct'");
+
+        for(int index = 0; index < inventory.size(); index++) {
+            InventoryItem currentItem = inventory.get(index);
+
+            if(currentItem.getProduct().getId() == updatedProduct.getId()){
+
+                InventoryItem updatedItem = new InventoryItem(updatedProduct, currentItem.getQuantityInStock());
+                
+                inventory.set(index, updatedItem);
+                
+                return true;    
+            }
+        }
+        return false;
     }
+
+
 
     @Override
     public boolean updateQuantity(int productId, int quantityInStock) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateQuantity'");
+
+        //Product product = getInventoryItemByProductId(productId).getProduct();
+
+        for(int index = 0; index < inventory.size();index ++){
+            InventoryItem currentItem = inventory.get(index);
+
+            if(currentItem.getProduct().getId() == productId ){
+
+                InventoryItem updatedItem = new InventoryItem(currentItem.getProduct(), quantityInStock);
+                inventory.set(index, updatedItem);
+                return true;    
+            }
+        }
+
+        return false;
     }
 
     @Override
     public boolean removeProductById(int productId) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeProductById'");
+
+        InventoryItem item = getInventoryItemByProductId(productId);
+
+        if(item == null) {
+            return false;
+        }
+        return inventory.remove(item);        
     }
 
     @Override
     public void clearInventory() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clearInventory'");
+        inventory.clear();
     }
 
 }

@@ -30,12 +30,60 @@ public class CustomerActions {
             switch (choice) {
                 case 1:
                     System.out.println("You choose to view products.");
-                    System.out.println("This is milestone #1. No actual fuctionality has been implemented yet.");
+
+                    /*
+                    store.getInventoryManager().getAllInventoryItems().forEach(item -> {
+                        System.out.println(item);
+                    });
+                    */
+
+                    store.getInventoryManager().getAllInventoryItems().forEach(item -> {
+                        System.out.println("Product ID: " + item.getProduct().getId());
+                        System.out.println("Product Name: " + item.getProduct().getName());
+                        System.out.println("Product Description: " + item.getProduct().getDescription());
+                        System.out.println("Product Date of Manufacture: " + item.getProduct().getDateOfManufacture());
+                        System.out.println("Product Price: $" + item.getProduct().getPrice());
+                        System.out.println("Product Category: " + item.getProduct().getCategory());
+                        System.out.println("Quantity in Stock: " + item.getQuantityInStock());
+                        System.out.println();
+                    });
                     break;
 
                 case 2:
-                    System.out.println("You choose to search for a product  .");
-                    System.out.println("This is milestone #1. No actual fuctionality has been implemented yet.");
+                    System.out.println("Do you want to search by name or description?");
+
+                    String searchTerm = input.readString("Enter the 'name' or 'description' to search for: ");
+
+                    if(searchTerm.equalsIgnoreCase("name")) {
+                        System.out.println("You choose to search for a product by name.");
+                        String nameToSearch = input.readString("Enter the product name to search for: ");
+                        store.getInventoryManager().searchProductsByName(nameToSearch).forEach(item -> {
+                            System.out.println("Product ID: " + item.getProduct().getId());
+                            System.out.println("Product Name: " + item.getProduct().getName());
+                            System.out.println("Product Description: " + item.getProduct().getDescription());
+                            System.out.println("Product Date of Manufacture: " + item.getProduct().getDateOfManufacture());
+                            System.out.println("Product Price: $" + item.getProduct().getPrice());
+                            System.out.println("Product Category: " + item.getProduct().getCategory());
+                            System.out.println("Quantity in Stock: " + item.getQuantityInStock());
+                            System.out.println();
+                        });
+                        
+                    } else if(searchTerm.equalsIgnoreCase("description")) {
+                        System.out.println("You choose to search for a product by description.");
+                        String descriptionToSearch = input.readString("Enter the product description to search for: ");
+                        store.getInventoryManager().searchProductsByDescription(descriptionToSearch).forEach(item -> {
+                            System.out.println("Product ID: " + item.getProduct().getId());
+                            System.out.println("Product Name: " + item.getProduct().getName());
+                            System.out.println("Product Description: " + item.getProduct().getDescription());
+                            System.out.println("Product Date of Manufacture: " + item.getProduct().getDateOfManufacture());
+                            System.out.println("Product Price: $" + item.getProduct().getPrice());
+                            System.out.println("Product Category: " + item.getProduct().getCategory());
+                            System.out.println("Quantity in Stock: " + item.getQuantityInStock());
+                            System.out.println();
+                        });
+                    } else {
+                        System.out.println("Invalid search term. Please enter 'name' or 'description'.");
+                    }
                     break;
 
                 case 3:
